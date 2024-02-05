@@ -25,15 +25,15 @@
 - name: Construct the runner command without secrets
   set_fact:
     generated_runner_name: >-
-      {% if gitlab_runner_extra.ip_map is defined %} 
-      {{ gitlab_runner_extra.ip_map[ansible_host].name | default('') }} 
-      {% else %} 
-      {{ gitlab_runner.name | default(ansible_hostname + '-' + gitlab_runner_index | string) }} 
+      {% if gitlab_runner_extra.ip_map is defined %}
+      {{ gitlab_runner_extra.ip_map[ansible_host].name | default('') }}
+      {% else %}
+      {{ gitlab_runner.name | default(ansible_hostname + '-' + gitlab_runner_index | string) }}
       {% endif %}
 
 - name: Debugging 4
   ansible.builtin.debug:
-    var: "{{ generated_runner_name | trim }}"
+    var: generated_runner_name
 
 - name: Validate GitLab Runner configurations
   include_tasks: validate-runner-config.yml
