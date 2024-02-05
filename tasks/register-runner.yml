@@ -15,6 +15,10 @@
   ansible.builtin.debug:
     var: ansible_host
 
+- name: IP
+  ansible.builtin.debug:
+    var: ip_map
+
 - name: Construct the runner command without secrets
   set_fact:
     register_runner_cmd: >-
