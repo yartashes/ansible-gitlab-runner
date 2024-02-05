@@ -7,6 +7,10 @@
   import_tasks: update-ca-bundle.yml
   when: force_accept_gitlab_server_self_signed
 
+- name: Debugging
+  ansible.builtin.debug:
+    var: lookup('ansible.builtin.env', 'RUNER_IP_MAP') | from_json
+
 - name: Construct the runner command without secrets
   set_fact:
     register_runner_cmd: >-
