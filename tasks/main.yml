@@ -33,7 +33,7 @@
 
 - name: Debugging 4
   ansible.builtin.debug:
-    var: {{ generated_runner_name | trim }}
+    var: "{{ generated_runner_name | trim }}"
 
 - name: Validate GitLab Runner configurations
   include_tasks: validate-runner-config.yml
