@@ -10,6 +10,18 @@
       paths:
         - vars
 
+- name: Debugging 1
+  ansible.builtin.debug:
+    var: ansible_host
+
+- name: Debugging 2
+  ansible.builtin.debug:
+    var: gitlab_runner_extra
+
+- name: Debugging 3
+  ansible.builtin.debug:
+    var: gitlab_runner_extra.ip_map[ansible_host]
+
 - name: Validate GitLab Runner configurations
   include_tasks: validate-runner-config.yml
   vars:
