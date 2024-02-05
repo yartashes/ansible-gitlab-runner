@@ -34,8 +34,8 @@
       {% else %}
       --name '{{ actual_gitlab_runner_name }}'
       {% endif %}
-      {% if gitlab_runner.tags|length > 0 %}
-      --tag-list '{{ gitlab_runner.tags|default([]) | join(",") }}'
+      {% if gitlab_runner.tags is defined %}
+      --tag-list '{{ gitlab_runner.tags | default([]) | join(",") }}'
       {% endif %}
       {% if gitlab_runner_extra.ip_map is defined %}
       --tag-list '{{ gitlab_runner_extra.ip_map[ansible_host].tags | default([]) | join(",") }}'
