@@ -15,7 +15,7 @@
 - name: (Windows) Register GitLab Runner
   include_tasks: register-runner-windows.yml
   vars:
-    actual_gitlab_runner_name: {% if gitlab_runner_extra.ip_map is defined %} "{{ gitlab_runner_extra.ip_map[ansible_host].name | default('') }}" {% else %} "{{ gitlab_runner.name | default(ansible_hostname + '-' + gitlab_runner_index | string) }}" {% endif %}
+    actual_gitlab_runner_name: "{{ generated_runner_name.split() | join(' ') }}"
   when: gitlab_runner.token is defined or gitlab_runner_registration_token | string | length > 0
   loop: "{{ gitlab_runner_runners }}"
   loop_control:
