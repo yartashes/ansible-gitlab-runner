@@ -29,11 +29,7 @@
       {{ gitlab_runner_executable }} register
       --non-interactive
       --url '{{ gitlab_runner.url|default(gitlab_runner_coordinator_url) }}'
-      {% if gitlab_runner_extra.ip_map is defined %}
-      --name '{{ gitlab_runner_extra.ip_map[ansible_host].name | default("") }}'
-      {% else %}
       --name '{{ actual_gitlab_runner_name }}'
-      {% endif %}
       {% if gitlab_runner.tags is defined %}
       --tag-list '{{ gitlab_runner.tags | default([]) | join(",") }}'
       {% endif %}
