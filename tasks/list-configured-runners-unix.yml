@@ -6,6 +6,9 @@
   check_mode: false
   become: "{{ gitlab_runner_system_mode }}"
 
+- name: Print List configured runners
+  debug: var=registered_runners_json_result
+
 - name: Initialze runner list
   set_fact:
     registered_gitlab_runner_names: []
