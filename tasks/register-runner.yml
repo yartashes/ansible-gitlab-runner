@@ -7,10 +7,6 @@
   import_tasks: update-ca-bundle.yml
   when: force_accept_gitlab_server_self_signed
 
-- name: Debugging 4
-  ansible.builtin.debug:
-    var: gitlab_runner_extra.ip_map[ansible_host].tags
-
 - name: Construct the runner command without secrets
   set_fact:
     register_runner_cmd: >-

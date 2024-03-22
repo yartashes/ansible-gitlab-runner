@@ -44,6 +44,7 @@ gitlab_runner_session_server_session_timeout: 1800
 # You should provide a repository containing the needed packages before running this role.
 # Use this if you use a mirror repository
 # gitlab_runner_skip_package_repo_install: true
+gitlab_runner_is_installed: false
 
 gitlab_runner_config_update_mode: by_config_toml
 gitlab_unregister_runner_executors_which_are_not_longer_configured: false
