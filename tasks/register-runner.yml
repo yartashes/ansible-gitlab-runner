@@ -13,7 +13,7 @@
       {{ gitlab_runner_executable }} register
       --non-interactive
       --url '{{ gitlab_runner.url|default(gitlab_runner_coordinator_url) }}'
-      --name '{{ actual_gitlab_runner_name }}'
+      --name '{{ actual_gitlab_runner_name.split() | join(' ') }}'
       {% if gitlab_runner.tags is defined %}
       --tag-list '{{ gitlab_runner.tags | default([]) | join(",") }}'
       {% endif %}
@@ -166,12 +166,12 @@
           {% if gitlab_runner.ssh_password is defined %}
           --ssh-password '{{ gitlab_runner.ssh_password|hash("sha1") }}'
           {% endif %}
-        dest: "{{ gitlab_runner_config_file_location }}/last-runner-config-{{ actual_gitlab_runner_name }}"
+        dest: "{{ gitlab_runner_config_file_location }}/last-runner-config-{{ actual_gitlab_runner_name.split() | join(' ') }}"
       register: runner_config_state
 
     - import_tasks: unregister-runner.yml
       when:
-        - actual_gitlab_runner_name in registered_gitlab_runner_names
+        - (actual_gitlab_runner_name.split() | join(' ')) in registered_gitlab_runner_names
         - runner_config_state.changed
   when: gitlab_runner_config_update_mode == 'by_registering'
 
@@ -194,7 +194,7 @@
     --ssh-password '{{ gitlab_runner.ssh_password }}'
     {% endif %}
   when:
-    - actual_gitlab_runner_name not in registered_gitlab_runner_names
+    - (actual_gitlab_runner_name.split() | join(' ')) not in registered_gitlab_runner_names
     - gitlab_runner.state|default('present') == 'present'
   no_log: true
   become: "{{ gitlab_runner_system_mode }}"
