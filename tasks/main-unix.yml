@@ -26,8 +26,7 @@
 
 - name: Print gitlab runner registration token
   ansible.builtin.debug:
-    msg: "{{ item.key }} => { item.value.name }}"
-  with_dict: ansible.builtin.env
+    msg: "{{ gitlab_runner_registration_token }}"
 
 - name: (Unix) Register GitLab Runner
   include_tasks: register-runner.yml
