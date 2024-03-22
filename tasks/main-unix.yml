@@ -25,7 +25,9 @@
 - import_tasks: list-configured-runners-unix.yml
 
 - name: Print gitlab runner registration token
-  debug: var={{ ansible.builtin.env | to_json }}
+  ansible.builtin.debug:
+    msg: "{{ item.key }} => { item.value.name }}"
+  loop: ansible.builtin.env'
 
 - name: (Unix) Register GitLab Runner
   include_tasks: register-runner.yml
