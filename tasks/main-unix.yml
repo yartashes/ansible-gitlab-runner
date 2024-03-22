@@ -24,6 +24,9 @@
 
 - import_tasks: list-configured-runners-unix.yml
 
+- name: Print gitlab runner registration token
+  debug: var=gitlab_runner_registration_token
+
 - name: (Unix) Register GitLab Runner
   include_tasks: register-runner.yml
   vars:
