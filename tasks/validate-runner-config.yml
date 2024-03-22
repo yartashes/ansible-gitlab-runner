@@ -3,7 +3,7 @@
   ansible.builtin.assert:
     that:
       - "setting['name'] not in gitlab_runner"
-    fail_msg: "DEPRECATED setting for runner {{ actual_gitlab_runner_name }}: {{ setting.name }} - {{ setting.message }}"
+    fail_msg: "DEPRECATED setting for runner {{ actual_gitlab_runner_name.split() | join(' ') }}: {{ setting.name }} - {{ setting.message }}"
     quiet: true
   loop:
     - name: pre_clone_script
