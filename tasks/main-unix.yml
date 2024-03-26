@@ -1,4 +1,8 @@
 ---
+- name: debug
+  ansible.builtin.debug:
+    var : ansible_os_family
+
 - name: Install GitLab Runner (Debian)
   include_tasks: install-debian.yml
   when: ansible_os_family == 'Debian' and not gitlab_runner_is_installed
